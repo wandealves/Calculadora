@@ -22,8 +22,8 @@ namespace Calculadora.Dominio.Servicos
 
             var divisorNatural = new DivisorNatural();
 
-            var fatoresPrimos = FatorPrimo(numero, numero);
-            var divisores = Divisores(fatoresPrimos);
+            var fatoresPrimos = CalcularFatorPrimo(numero, numero);
+            var divisores = divisorNatural.CalcularDivisores(fatoresPrimos);
 
             divisorNatural.AddDivisores(divisores.Distinct().OrderBy(x => x).ToList());
             divisorNatural.AddPrimos(fatoresPrimos.Distinct().OrderBy(x => x).ToList());
@@ -31,32 +31,7 @@ namespace Calculadora.Dominio.Servicos
             return divisorNatural;
         }
 
-        private List<long> Divisores(List<long> fatores, int index = 0, List<long> divisores = null)
-        {
-            if (divisores == null)
-            {
-                divisores = new List<long>();
-                divisores.Add(1);
-            }
-
-            var fator = fatores[index];
-            var clone = divisores.ToList();
-
-            foreach (var divisor in clone)
-            {
-                var valor = fator * divisor;
-                if (!divisores.Any(x => x == valor))
-                    divisores.Add(valor);
-            }
-
-            if ((fatores.Count - 1) == index) return divisores;
-
-            index += 1;
-
-            return Divisores(fatores, index, divisores);
-        }
-
-        private List<long> FatorPrimo(long valorOriginal, long numero, long fator = 2, List<long> fatores = null)
+        private List<long> CalcularFatorPrimo(long valorOriginal, long numero, long fator = 2, List<long> fatores = null)
         {
             if (fatores == null)
             {
@@ -66,7 +41,7 @@ namespace Calculadora.Dominio.Servicos
 
             if (valorOriginal == numero)
             {
-                var listaNoDicionario = _memorizacao.Obter(nameof(FatorPrimo), numero.ToString());
+                var listaNoDicionario = _memorizacao.Obter(nameof(CalcularFatorPrimo), numero.ToString());
 
                 if (listaNoDicionario?.Any() == true) return listaNoDicionario.ToList();
             }
@@ -87,11 +62,11 @@ namespace Calculadora.Dominio.Servicos
 
             if (divisor == 1)
             {
-                _memorizacao.Adicionar(nameof(FatorPrimo), valorOriginal.ToString(), fatores);
+                _memorizacao.Adicionar(nameof(CalcularFatorPrimo), valorOriginal.ToString(), fatores);
                 return fatores;
             }
             else
-                return FatorPrimo(valorOriginal, divisor, fator, fatores);
+                return CalcularFatorPrimo(valorOriginal, divisor, fator, fatores);
         }
     }
 }
