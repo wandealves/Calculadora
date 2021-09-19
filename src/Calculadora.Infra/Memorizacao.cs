@@ -19,7 +19,7 @@ namespace Calculadora.Infra
         public IReadOnlyDictionary<T, IList<U>> Valores => _valores;
         public Dictionary<T, Dictionary<T, IList<U>>> Dicionarios => _dicionarios;
 
-        public void AdicionarValor(T chave, U valor)
+        public void Adicionar(T chave, U valor)
         {
             if (!_valores.ContainsKey(chave))
             {
@@ -37,13 +37,13 @@ namespace Calculadora.Infra
             }
         }
 
-        public void AdicionarValores(T chave, List<U> valores)
+        public void Adicionar(T chave, List<U> valores)
         {
             if (!_valores.ContainsKey(chave))
                 _valores.Add(chave, valores);
         }
 
-        public void AdicionarValorNoDicionario(T chaveExterna, T chaveInterna, U valor)
+        public void Adicionar(T chaveExterna, T chaveInterna, U valor)
         {
             if (!_dicionarios.ContainsKey(chaveExterna))
             {
@@ -63,7 +63,7 @@ namespace Calculadora.Infra
             }
         }
 
-        public void AdicionarValoresNoDicionario(T chaveExterna, T chaveInterna, IList<U> valores)
+        public void Adicionar(T chaveExterna, T chaveInterna, IList<U> valores)
         {
             if (!_dicionarios.ContainsKey(chaveExterna))
             {
@@ -82,7 +82,7 @@ namespace Calculadora.Infra
             }
         }
 
-        public IList<U> ObterValores(T chave)
+        public IList<U> Obter(T chave)
         {
             if (_valores.Any() == true)
             {
@@ -92,7 +92,7 @@ namespace Calculadora.Infra
             return default(IList<U>);
         }
 
-        public U ObterValor(T chave)
+        public U ObterUnico(T chave)
         {
             if (_valores.Any() == true)
             {
@@ -102,7 +102,7 @@ namespace Calculadora.Infra
             return default(U);
         }
 
-        public IList<U> ObterValoresdoDicionario(T chaveExterna, T chaveInterna)
+        public IList<U> Obter(T chaveExterna, T chaveInterna)
         {
             if (_dicionarios.Any() == true)
             {
