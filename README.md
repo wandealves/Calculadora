@@ -23,7 +23,7 @@ dotnet test
 
 ## 📦 Desenvolvimento
 
-![alt text](https://raw.githubusercontent.com/username/projectname/branch/path/to/img.png)
+![alt text](https://github.com/wandealves/Calculadora/blob/main/img/tela_desafio.png)
 
 ## ✒️ Autores
 
