@@ -8,11 +8,27 @@ O projeto foi desenvolvido com .NET 5 e ReasctJs ba exibição, foi usado a estr
 
 ### 🔧 Execução
 
-Dentro da pasta Web, execute o comando:
+1 - Antes de executar o projeto, tem que gerar a pasta node_mule para rodar local:
+
+No Visual Studio:
+
+Build Solution
+
+Na linha de comando:
+
+Na pasta ClientApp no projeto web do projeto execute:
+
+npm install
+
+ou
+
+yarn
+
+2 - Dentro da pasta Web, execute o comando:
 
 dotnet run
 
-Acesse  https://localhost:5001/
+Acesse https://localhost:5001/
 
 ## ⚙️ Executando os testes
 
@@ -20,15 +36,13 @@ Dentro do projeto de testes:
 
 dotnet test
 
-
 ## 📦 Desenvolvimento
 
 ![alt text](https://github.com/wandealves/Calculadora/blob/main/img/tela_desafio.png)
 
 ## ✒️ Autores
 
-* **Desenvolvido** - [Wanderson](https://github.com/wandealves)
-
+- **Desenvolvido** - [Wanderson](https://github.com/wandealves)
 
 ## 📄 Licença
 
