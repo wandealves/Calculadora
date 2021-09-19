@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Calculadora.Dominio.Entidades
 {
@@ -15,6 +16,31 @@ namespace Calculadora.Dominio.Entidades
 
         public IReadOnlyCollection<long> Primos => _primos.ToArray();
         public IReadOnlyCollection<long> Divisores => _divisores.ToArray();
+
+        public IList<long> CalcularDivisores(List<long> fatores, int index = 0, List<long> divisores = null)
+        {
+            if (divisores == null)
+            {
+                divisores = new List<long>();
+                divisores.Add(1);
+            }
+
+            var fator = fatores[index];
+            var clone = divisores.ToList();
+
+            foreach (var divisor in clone)
+            {
+                var valor = fator * divisor;
+                if (!divisores.Any(x => x == valor))
+                    divisores.Add(valor);
+            }
+
+            if ((fatores.Count - 1) == index) return divisores;
+
+            index += 1;
+
+            return CalcularDivisores(fatores, index, divisores);
+        }
 
         public void AddPrimo(long primo)
         {
