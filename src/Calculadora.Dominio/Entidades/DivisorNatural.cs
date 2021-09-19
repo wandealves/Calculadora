@@ -42,6 +42,52 @@ namespace Calculadora.Dominio.Entidades
             return CalcularDivisores(fatores, index, divisores);
         }
 
+        public IList<long> CalcularFatorPrimo(long numero, long fator = 2, List<long> fatores = null)
+        {
+            if (fatores == null)
+            {
+                fatores = new List<long>();
+                fatores.Add(1);
+            }
+
+            var divisor = numero;
+
+            var resto = numero % fator;
+            var ehPrimo = EhPrimo(fator);
+
+            if (resto == 0 && ehPrimo)
+            {
+                divisor = numero / fator;
+                fatores.Add(fator);
+            }
+
+            if (resto != 0)
+                fator += 1;
+
+            if (divisor == 1)
+            {
+                return fatores;
+            }
+            else
+                return CalcularFatorPrimo(divisor, fator, fatores);
+        }
+
+        public bool EhPrimo(long numero)
+        {
+            var ehPrimo = numero != 1;
+
+            for (int i = 2; i < numero; i++)
+            {
+                if (numero % i == 0)
+                {
+                    ehPrimo = false;
+                    break;
+                }
+            }
+
+            return ehPrimo;
+        }
+
         public void AddPrimo(long primo)
         {
             _primos.Add(primo);
