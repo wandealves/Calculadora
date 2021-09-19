@@ -1,3 +1,8 @@
+using Calculadora.Dominio.Interfaces;
+using Calculadora.Dominio.Servicos;
+using Calculadora.Infra;
+using Calculadora.Web.Filters;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
@@ -19,8 +24,10 @@ namespace Calculadora.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton(typeof(IMemorizacao<,>), typeof(Memorizacao<,>));
+            services.AddTransient<IDivisorNaturalService, DivisorNaturalService>();
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddMvcOptions(o => o.Filters.Add(new ExceptionFilter()));
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
