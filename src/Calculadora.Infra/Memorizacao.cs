@@ -24,7 +24,7 @@ namespace Calculadora.Infra
 
         public U Obter(T chave)
         {
-            if (_valores.Any() == true)
+            if (_valores.Any() == true && _valores.ContainsKey(chave))
             {
                 return _valores[chave];
             }
