@@ -17,6 +17,11 @@ function DivisaoNatural(props) {
     function calcular(event) {
         event.preventDefault();
 
+        if (numero <= 0) {
+            setError('informe um número diferente de zero');
+            $('#myAlert').show();
+            return;
+        }
         setCarregando(true);
 
         api.get(`DivisaoNatural?numero=${numero}`)
@@ -36,8 +41,6 @@ function DivisaoNatural(props) {
                 setError('ao tentar realizar o calculo');
                 $('#myAlert').show();
             }).finally(() => setCarregando(false));
-
-
     }
 
     function altualizarNumero(event) {
@@ -66,7 +69,7 @@ function DivisaoNatural(props) {
             <div className="row">
                 <div className="form-inline">
                     <div className="form-group mb-3 ml-3">
-                        <input onChange={altualizarNumero} type="number" className="form-control" id="inputPassword2" placeholder="Número" value={numero} />
+                        <input min="0" onChange={altualizarNumero} type="number" className="form-control" id="inputPassword2" placeholder="Número" value={numero} />
                     </div>
                     {carregando ? (
                         <div className="spinner-border text-primary mb-3 ml-2" role="status">
