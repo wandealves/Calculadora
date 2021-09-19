@@ -66,7 +66,7 @@ namespace Calculadora.Dominio.Servicos
 
             if (valorOriginal == numero)
             {
-                var listaNoDicionario = _memorizacao.ObterValoresdoDicionario(nameof(FatorPrimo), numero.ToString());
+                var listaNoDicionario = _memorizacao.Obter(nameof(FatorPrimo), numero.ToString());
 
                 if (listaNoDicionario?.Any() == true) return listaNoDicionario.ToList();
             }
@@ -87,7 +87,7 @@ namespace Calculadora.Dominio.Servicos
 
             if (divisor == 1)
             {
-                _memorizacao.AdicionarValoresNoDicionario(nameof(FatorPrimo), valorOriginal.ToString(), fatores);
+                _memorizacao.Adicionar(nameof(FatorPrimo), valorOriginal.ToString(), fatores);
                 return fatores;
             }
             else

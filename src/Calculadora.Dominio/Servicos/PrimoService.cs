@@ -15,7 +15,7 @@ namespace Calculadora.Dominio.Servicos
 
         public bool EhPrimo(long numero)
         {
-            var valoresPrimos = _memorizacao.ObterValores(nameof(EhPrimo));
+            var valoresPrimos = _memorizacao.Obter(nameof(EhPrimo));
 
             if (valoresPrimos != null && valoresPrimos.Any(x => x == numero))
             {
@@ -34,7 +34,7 @@ namespace Calculadora.Dominio.Servicos
             }
 
             if (ehPrimo)
-                _memorizacao.AdicionarValor(nameof(EhPrimo), numero);
+                _memorizacao.Adicionar(nameof(EhPrimo), numero);
             return ehPrimo;
         }
     }
