@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using Calculadora.Dominio.Entidades;
 
 namespace Calculadora.Dominio.Interfaces
 {
     public interface IDivisorNaturalService
     {
+        DivisorNatural DivisoresNaturais(long numero);
     }
 }
