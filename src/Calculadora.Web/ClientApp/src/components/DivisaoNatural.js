@@ -2,8 +2,6 @@
 
 import $ from 'jquery';
 
-import api from '../services/api';
-
 import ResultadoDivisores from './ResultadoDivisores';
 
 function DivisaoNatural(props) {
@@ -24,23 +22,20 @@ function DivisaoNatural(props) {
         }
         setCarregando(true);
 
-        api.get(`DivisaoNatural?numero=${numero}`)
-            .then((response) => {
+        fetch(`DivisaoNatural?numero=${numero}`)
+            .then(res => res.json())
+            .then(res => {
+                if (!res) return;
 
-                if (!response.data) return;
-
-                const { primos, divisores } = response.data;
+                const { primos, divisores } = res;
 
                 setDivisores(divisores);
                 setPrimos(primos);
 
-                console.log('primos', primos);
-                console.log('primos', divisores);
-            })
-            .catch((_) => {
+            }).catch((_) => {
                 setError('ao tentar realizar o calculo');
                 $('#myAlert').show();
-            }).finally(() => setCarregando(false));
+            }).finally(() => setCarregando(false));;
     }
 
     function altualizarNumero(event) {
